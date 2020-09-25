@@ -13,8 +13,12 @@ Read in the litters dataset.
 
 ```{r}
 
-litters_df  <- read_csv("./data_import_examples/data_import_examples/FAS_litters.csv")
-litters_df <- janitor::clean_names(litters_df)
+litters_df  <-
+  read_csv("./data_import_examples/data_import_examples/FAS_litters.csv") %>% 
+  janitor::clean_names() %>% 
+  select(-pups_survive) %>% 
+  mutate(pups_tot=pups_born_alive+pups_dead_birth)
+  
 
 litters_df
 ```
@@ -22,36 +26,44 @@ litters_df
 
 
 
+##select
 
-
-
-
-
-
-
-
-
+```{r}
+select(litters_df,-litter_number)
+```
 
 
 
 
 
 ```{r}
-skimr::skim(litters_df)
+select(litters_df, GROUP=group)
 ```
 
+
+
+Select helpers
+```{r}
+select(litters_df, starts_with())
+
+
+```
+
+## `filter`
+
+```{r}
+filter(litters_df, gd0_weight <22)
+```
+
+```{r}
+filter(litters_df, gd0_weight >=22)
+```
+
+```{r}
+mutate()
+```
 
 ```{r}
 
-mlb_df = read_excel("./data_import_examples/data_import_examples/mlb11.xlsx")
-
 ```
-
-```{r dplyr}
-
-
-```
-
-
-
 
